@@ -1,4 +1,6 @@
-# 全てのメールについてすべての文字の頻度を数える
+# 全ての文書についてすべてのラベル及びすべての文字の頻度を数える。 
+#途中
+
 import sys
 import MeCab
 m = MeCab.Tagger("-Owakati")
