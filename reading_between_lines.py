@@ -1,4 +1,4 @@
-# メールのn-m行目の内容を表示する
+# ファイル内の文書のn-m行目の内容を表示する
 #kadai4,5
 import sys
 file_name = sys.argv[1]
