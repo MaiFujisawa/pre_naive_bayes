@@ -11,10 +11,8 @@ with open(file_name, 'r') as fp:
     sum = 0
     for line in fp:
         line = m.parse(line)
-        result = line.split()
-        print(result)
-        result = len(result)
-        sum += result
+        lines = line.split()
+        sum += len(lines)
 
     try:
         print(sum)
