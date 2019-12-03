@@ -1,4 +1,4 @@
-# 全てのメールの最後のメールについてすべての文字の頻度を数える
+#comment
 import sys
 import MeCab
 m = MeCab.Tagger("-Owakati")
@@ -17,7 +17,6 @@ def file_writing(dict):
         fp.write(dict)
 
 def label_freq(sentence):
-    # 全文を一気に読み込み、辞書に渡して頻度を計算させる
     words = []
     for sent in sentence:
         sent = m.parse(sent).split(" ")
