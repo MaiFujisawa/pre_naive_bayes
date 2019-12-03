@@ -11,6 +11,7 @@ def file_reading(file_name):
     with open(file_name, 'r') as fp:
         for line in fp:
             line = line.rstrip('\n')
+            #lines.append(line)
     return line
 
 
