@@ -1,7 +1,5 @@
-# 全てのメールについてすべての文字の頻度を数える
-
+#count probabilityOf(word given sentence) or probabilityOf(label)
 import sys
-import re
 import MeCab
 
 m = MeCab.Tagger("-Owakati")
@@ -13,7 +11,6 @@ def file_reading(file_name):
     with open(file_name, 'r') as fp:
         for line in fp:
             line = line.rstrip('\n')
-            # lines.append(line)
     return line
 
 
