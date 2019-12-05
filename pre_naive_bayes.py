@@ -1,4 +1,4 @@
-# pre_naive_bayes program
+# calculate probability labels in all sentence
 # halfway
 
 
