@@ -1,69 +1,103 @@
-#count probabilityOf(word given sentence) or probabilityOf(label)
+# pre_naive_bayes program
+# halfway
+
+
 import sys
 import MeCab
-
 m = MeCab.Tagger("-Owakati")
-from collections import Counter
 
 
 def file_reading(file_name):
-    lines = []
+    #output is str
+    mails = ""
     with open(file_name, 'r') as fp:
         for line in fp:
-            line = line.rstrip('\n')
-            #lines.append(line)
-    return line
+            mails += line
+    return mails
 
 
-def count_word2freq_perLabel(sentence):
-    # count word's frequency per mail
-    word_str = m.parse(sentence)
-    words = re.split('[,. ]',word_str)
-    counter = Counter(words)
-    return (counter)
+
+def make_mail_list(mail):
+    # str->list
+    mails = (mail.strip()).splitlines()
+    return mails
 
 
-def count_label_frequency(sentences):
-    labels = sentences.split(',')
-    return labels[0]
+def devide_label_and_sentence(sentence):
+    #str->dist
+    labels_and_sentences = sentence.split(',')
+    label = labels_and_sentences[0]
+    sentence = count_label2frequency(labels_and_sentences[1])
+    label2sentence = {}
+    label2sentence = {label:sentence}
+    return label2sentence
 
 
-def make_label2word2freq(sentences,word2freq):   
-    sentences = sentences.split(',')   
-    # sentences is label's list   
-    label2word2freq = {}   
+def count_label2frequency(sentence):
+    # str->dictionary
+    sentence = wakati_sentence(sentence)
+    word2frequency = count_sentence2frequency(sentence)
+    return word2frequency
 
-    for sent in sentences:   
-        label2word2freq[sent] = label2word2freq.get(sent, {})   
-        label2word2freq = word2freq(sent, label2word2freq)   
-    return(label2word2freq)   
 
-    # word2total = {}   
-    # word2total.keys = label2frequency['S']   
-    # word2total.values = word2frequency{word}   
-    # print(word2total)  
+def count_sentence2frequency(sentence):
+    # str->dictionary
+    sentence2frequency = {}
+    for sent in sentence:
+        sentence2frequency[sent] = sentence2frequency.get(sent, 0) + 1
+    return sentence2frequency
 
-def calc_pLabel(l2f, last):   
-    label2calc = {}   
-    for label in l2f.keys():   
-        label2calc[label] = l2f[label] /last
-    return label2calc   
 
+def count_label2sentence(sentences):
+    #list->dict
+    label = sentences[0]
+
+    #sentence = sentences[1]
+    #label2sentence = {label:sentence}
+    #return label2sentence
+    return label
+
+
+def wakati_sentence(sentence):
+    #str->list
+    words = m.parse(sentence).split()
+    return words
 
 
 
 def main():
     file_name = sys.argv[1]
-    line = file_reading(file_name)
-    lines = []
-    lines.append(line)
-    last_sentence = len(lines)
+    mail_data = file_reading(file_name)
 
-    for label in range(0, last_sentence):
-        word2freq = count_word2freq_perLabel(lines[label])
-        word2freq = dict(word2freq)
+#count label2sentence
+    #make_label2(word2frequency)
+    # [{label,{word,frequency}}...]
+    mails = make_mail_list(mail_data)
+    all_mails_length = len(mails)
+    all_mails = []
+    for num in range(all_mails_length):
+            label2sentence = devide_label_and_sentence(mails[num])
+            all_mails.append(label2sentence)
 
-    label2word2freq = make_label2word2freq(line,word2freq)
-    print(label2word2freq)
-main()
+
+
+#calc p(label)
+    labels_str = []
+
+    for num in range(all_mails_length):
+        labels_and_sentences = (mails[num]).split(',')
+        labels_str.append(labels_and_sentences[0])
+        label2freq = count_sentence2frequency(labels_str)
+
+
+
+    #calc p(word|label)
+    # ラベルごとにメールをリストに格納する
+    #メール内の単語の頻度を数える  
+
+
+if __name__ == '__main__':
+    main()
+
+
 
