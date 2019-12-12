@@ -78,13 +78,9 @@ def main(textfile_name):
         for key in label2freq: 
             label2freq[key] = label2freq.get(key,0)/number_of_mails 
     print(label2freq) 
- 
- 
-    # calc p(word|label) 
-    #count len(word2frequency_per_label) 
-    #calculate word2frequency/len(word2frequency_per_label) 
- 
- 
+  
+    # calc p(word|label)
+
 if __name__ == '__main__': 
     textfile_name = sys.argv[1] 
     main(textfile_name) 
