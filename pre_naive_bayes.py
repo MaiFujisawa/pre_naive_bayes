@@ -18,18 +18,18 @@ def road_file(file_name):
     return mails 
  
  
-def wakati_sentence(sentence): 
-    # str->list 
-    words = m.parse(sentence).split() 
-    return words 
- 
- 
 def count_label2frequency(sentence): 
     # str->dictionary 
     sentence = wakati_sentence(sentence) 
     word2frequency = count_sentence2frequency(sentence) 
     return word2frequency 
  
+ 
+ def wakati_sentence(sentence): 
+    # str->list 
+    words = m.parse(sentence).split() 
+    return words 
+   
  
 def count_sentence2frequency(sentence): 
     # str->dictionary 
