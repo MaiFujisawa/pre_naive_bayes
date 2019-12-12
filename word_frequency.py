@@ -1,4 +1,5 @@
 # pre_naive_bayes program
+#word2frequency
 # halfway
 
 
