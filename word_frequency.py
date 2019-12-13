@@ -1,5 +1,4 @@
 # pre_naive_bayes program
-#word2frequency
 # halfway
 
 
@@ -17,47 +16,30 @@ def road_file(file_name):
     return mails
 
 
-def count_label2frequency(sentence):
-    # str->dictionary
-    sentence = wakati_sentence(sentence)
-    word2frequency = count_sentence2frequency(sentence)
-    return word2frequency
-
-
 def wakati_sentence(sentence):
     # str->list
     words = m.parse(sentence).split()
     return words
 
-def count_sentence2frequency(sentence):
+
+def count_string(string, sentence2frequency={}):
     # str->dictionary
-    sentence2frequency = {}
-    for sent in sentence:
-        sentence2frequency[sent] = sentence2frequency.get(sent, 0) + 1
+    for character in string:
+        sentence2frequency[character] = sentence2frequency.get(character, 0) + 1
     return sentence2frequency
 
 
 def main(textfile_name):
     mails = road_file(textfile_name)
     number_of_mails = len(mails)
-    #print(mails[0][0]) N
-    #print(mails[0][1]) （重複して...ただくこともあります．
 
-    # make word2frequency per labels
-    # split label and sentence
-
-    labels = []
-    words_labels = []
-    mails_list = []
     for mail in mails:
-        labels.append(mail[0])
         for sentence in mail:
-            for label in labels:
-                words = wakati_sentence(sentence)
-                word2frequency = count_sentence2frequency(words)
-            word_label2freq = count_sentence2frequency(words_labels)
-    print(word2frequency/len(word_label2freq))
-
+            words = wakati_sentence(sentence)
+            word2frequency = count_string(string=words)
+            for key in word2frequency:
+                word2frequency[key] = word2frequency.get(key, 0) / number_of_mails
+            print(word2frequency)
 
 if __name__ == '__main__':
     textfile_name = sys.argv[1]
