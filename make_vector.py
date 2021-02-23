@@ -1,7 +1,5 @@
-import sys
-import re
+import sys,re,os
 import numpy as np
-import os
 from itertools import groupby
 from more_itertools import chunked
 
